@@ -14,11 +14,16 @@ public class SuccessActivity extends AppCompatActivity {
 
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
-        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        String cardNum = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 
         // Capture the layout's TextView and set the string as its text
         TextView textView = findViewById(R.id.successtext);
-        textView.setText(message);
+        String msg = getString(R.string.payment_success_for) + cardNum;
+        if(cardNum.isEmpty()) {
+            msg = getString(R.string.payment_success);
+        }
+
+        textView.setText(msg);
 
     }
 }
