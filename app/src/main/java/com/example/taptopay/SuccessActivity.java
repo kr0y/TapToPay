@@ -18,7 +18,9 @@ public class SuccessActivity extends AppCompatActivity {
 
         // Capture the layout's TextView and set the string as its text
         TextView textView = findViewById(R.id.successtext);
-        String msg = getString(R.string.payment_success_for) + cardNum;
+        String last4digits = cardNum.substring(cardNum.length()-4);
+        String msg = getString(R.string.payment_success_for) + last4digits;
+
         if(cardNum==null || cardNum.isEmpty()) {
             msg = getString(R.string.payment_success);
         }

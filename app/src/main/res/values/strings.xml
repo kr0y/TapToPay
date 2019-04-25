@@ -4,7 +4,7 @@
         <string name="title_dashboard">Dashboard</string>
         <string name="title_notifications">Notifications</string>
         <string name="payment_success">Payment Successful</string>
-        <string name="payment_success_for">Payment Successful for </string>
+        <string name="payment_success_for">Payment Successful for\n VISA ****</string>
         <string name="tap_page_msg">Tap your card\non the back panel of phone</string>
         <string name="repoUrl">https://github.com/pro100svitlo/Credit-Card-NFC-Reader#questions-and-help</string>
         <string name="tv_noNfc">There is no NFC module on this device</string>
