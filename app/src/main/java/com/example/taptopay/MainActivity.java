@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity implements CardNfcAsyncTask.
 //        setSupportActionBar(mToolbar);
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (mNfcAdapter == null){
-            TextView noNfc = (TextView)findViewById(android.R.id.candidatesArea);
-            noNfc.setVisibility(View.VISIBLE);
+//            TextView noNfc = (TextView)findViewById(android.R.id.candidatesArea);
+//            noNfc.setVisibility(View.VISIBLE);
         } else {
             mCardNfcUtils = new CardNfcUtils(this);
 //            mPutCardContent = (TextView) findViewById(R.id.content_putCard);
