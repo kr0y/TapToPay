@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity implements CardNfcAsyncTask.
 
 
     private CardNfcAsyncTask mCardNfcAsyncTask;
-    private Toolbar mToolbar;
 
     private NfcAdapter mNfcAdapter;
     private AlertDialog mTurnNfcDialog;
@@ -140,7 +139,6 @@ public class MainActivity extends AppCompatActivity implements CardNfcAsyncTask.
     }
 
     private void showSnackBar(String message){
-        Snackbar.make(mToolbar, message, Snackbar.LENGTH_SHORT).show();
     }
 
     private void showTurnOnNfcDialog(){
@@ -182,13 +180,7 @@ public class MainActivity extends AppCompatActivity implements CardNfcAsyncTask.
 
     private void parseCardType(String cardType){
         if (cardType.equals(CardNfcAsyncTask.CARD_UNKNOWN)) {
-            Snackbar.make(mToolbar, getString(R.string.snack_unknown_bank_card), Snackbar.LENGTH_LONG)
-                    .setAction("GO", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            goToRepo();
-                        }
-                    });
+
         }
 //        } else if (cardType.equals(CardNfcAsyncTask.CARD_VISA)){
 //            mCardLogoIcon.setImageResource(R.mipmap.visa_logo);
