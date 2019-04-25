@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:src="@mipmap/bg"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="" />
+        tools:layout_editor_absoluteY="0dp" />
 
     <ImageView
         android:id="@+id/tapicon"

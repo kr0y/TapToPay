@@ -20,6 +20,9 @@ import com.pro100svitlo.creditCardNfcReader.CardNfcAsyncTask;
 import com.pro100svitlo.creditCardNfcReader.utils.CardNfcUtils;
 
 public class MainActivity extends AppCompatActivity implements CardNfcAsyncTask.CardNfcInterface{
+    public static final String EXTRA_MESSAGE = "com.example.taptopay.MESSAGE";
+
+
     private CardNfcAsyncTask mCardNfcAsyncTask;
     private Toolbar mToolbar;
     private LinearLayout mCardReadyContent;
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements CardNfcAsyncTask.
     private boolean mIsScanNow;
     private boolean mIntentFromCreate;
     private CardNfcUtils mCardNfcUtils;
+    private String cardNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +55,9 @@ public class MainActivity extends AppCompatActivity implements CardNfcAsyncTask.
             mCardNfcUtils = new CardNfcUtils(this);
 //            mPutCardContent = (TextView) findViewById(R.id.content_putCard);
 //            mCardReadyContent = (LinearLayout) findViewById(R.id.content_cardReady);
-            mCardNumberText = (TextView) findViewById(android.R.id.text1);
-            mExpireDateText = (TextView) findViewById(android.R.id.text2);
-            mCardLogoIcon = (ImageView) findViewById(android.R.id.icon);
+//            mCardNumberText = (TextView) findViewById(android.R.id.text1);
+//            mExpireDateText = (TextView) findViewById(android.R.id.text2);
+//            mCardLogoIcon = (ImageView) findViewById(android.R.id.icon);
             //createProgressDialog();
             initNfcMessages();
             mIntentFromCreate = true;
@@ -105,12 +109,14 @@ public class MainActivity extends AppCompatActivity implements CardNfcAsyncTask.
         mPutCardContent.setVisibility(View.GONE);
         mCardReadyContent.setVisibility(View.VISIBLE);
         String card = mCardNfcAsyncTask.getCardNumber();
+        cardNum = card;
         card = getPrettyCardNumber(card);
         String expiredDate = mCardNfcAsyncTask.getCardExpireDate();
         String cardType = mCardNfcAsyncTask.getCardType();
         mCardNumberText.setText(card);
         mExpireDateText.setText(expiredDate);
         parseCardType(cardType);
+
     }
 
     @Override
@@ -133,6 +139,12 @@ public class MainActivity extends AppCompatActivity implements CardNfcAsyncTask.
         mProgressDialog.dismiss();
         mCardNfcAsyncTask = null;
         mIsScanNow = false;
+
+        Intent intent = new Intent(this, SuccessActivity.class);
+        intent.putExtra(EXTRA_MESSAGE, cardNum);
+        startActivity(intent);
+
+
     }
 
 //    private void createProgressDialog(){
