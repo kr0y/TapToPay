@@ -25,11 +25,7 @@ public class MainActivity extends AppCompatActivity implements CardNfcAsyncTask.
 
     private CardNfcAsyncTask mCardNfcAsyncTask;
     private Toolbar mToolbar;
-    private LinearLayout mCardReadyContent;
-    private TextView mPutCardContent;
-    private TextView mCardNumberText;
-    private TextView mExpireDateText;
-    private ImageView mCardLogoIcon;
+
     private NfcAdapter mNfcAdapter;
     private AlertDialog mTurnNfcDialog;
     private ProgressDialog mProgressDialog;
@@ -45,20 +41,12 @@ public class MainActivity extends AppCompatActivity implements CardNfcAsyncTask.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        mToolbar = (Toolbar)findViewById(R.id.toolbar);
-//        setSupportActionBar(mToolbar);
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (mNfcAdapter == null){
-//            TextView noNfc = (TextView)findViewById(android.R.id.candidatesArea);
-//            noNfc.setVisibility(View.VISIBLE);
+;
         } else {
             mCardNfcUtils = new CardNfcUtils(this);
-//            mPutCardContent = (TextView) findViewById(R.id.content_putCard);
-//            mCardReadyContent = (LinearLayout) findViewById(R.id.content_cardReady);
-//            mCardNumberText = (TextView) findViewById(android.R.id.text1);
-//            mExpireDateText = (TextView) findViewById(android.R.id.text2);
-//            mCardLogoIcon = (ImageView) findViewById(android.R.id.icon);
-            //createProgressDialog();
+            createProgressDialog();
             initNfcMessages();
             mIntentFromCreate = true;
             onNewIntent(getIntent());
@@ -71,11 +59,9 @@ public class MainActivity extends AppCompatActivity implements CardNfcAsyncTask.
         mIntentFromCreate = false;
         if (mNfcAdapter != null && !mNfcAdapter.isEnabled()){
             showTurnOnNfcDialog();
-            mPutCardContent.setVisibility(View.GONE);
         } else if (mNfcAdapter != null){
             if (!mIsScanNow){
-                mPutCardContent.setVisibility(View.VISIBLE);
-                mCardReadyContent.setVisibility(View.GONE);
+
             }
             mCardNfcUtils.enableDispatch();
         }
@@ -106,15 +92,11 @@ public class MainActivity extends AppCompatActivity implements CardNfcAsyncTask.
 
     @Override
     public void cardIsReadyToRead() {
-        mPutCardContent.setVisibility(View.GONE);
-        mCardReadyContent.setVisibility(View.VISIBLE);
         String card = mCardNfcAsyncTask.getCardNumber();
         cardNum = card;
         card = getPrettyCardNumber(card);
         String expiredDate = mCardNfcAsyncTask.getCardExpireDate();
         String cardType = mCardNfcAsyncTask.getCardType();
-        mCardNumberText.setText(card);
-        mExpireDateText.setText(expiredDate);
         parseCardType(cardType);
 
     }
@@ -147,15 +129,15 @@ public class MainActivity extends AppCompatActivity implements CardNfcAsyncTask.
 
     }
 
-//    private void createProgressDialog(){
-////        String title = getString(R.string.ad_progressBar_title);
-////        String mess = getString(R.string.ad_progressBar_mess);
-//        mProgressDialog = new ProgressDialog(this);
-//        mProgressDialog.setTitle(title);
-//        mProgressDialog.setMessage(mess);
-//        mProgressDialog.setIndeterminate(true);
-//        mProgressDialog.setCancelable(false);
-//    }
+    private void createProgressDialog(){
+        String title = getString(R.string.ad_progressBar_title);
+        String mess = getString(R.string.ad_progressBar_mess);
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setTitle(title);
+        mProgressDialog.setMessage(mess);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setCancelable(false);
+    }
 
     private void showSnackBar(String message){
         Snackbar.make(mToolbar, message, Snackbar.LENGTH_SHORT).show();
