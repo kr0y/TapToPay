@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements CardNfcAsyncTask.
     public void cardIsReadyToRead() {
         String card = mCardNfcAsyncTask.getCardNumber();
         cardNum = card;
-        card = getPrettyCardNumber(card);
+        //card = getPrettyCardNumber(card);
         String expiredDate = mCardNfcAsyncTask.getCardExpireDate();
         String cardType = mCardNfcAsyncTask.getCardType();
         parseCardType(cardType);
